@@ -2,9 +2,11 @@ node {
     stage('Git Clone') {
 	 git credentialsId: 'git', url: 'https://github.com/alvorg11/ks.git'  
     }
+	
 	stage('Maven Version'){
-	    sh 'mvn version'  
+	    sh 'mvn --version'  
 	}	
+	
     stage('Maven Clean') {
         sh 'mvn clean' 
 	}	  
