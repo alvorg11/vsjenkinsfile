@@ -1,31 +1,51 @@
-node {
-    stage('Git Clone') {
-	 git credentialsId: 'git', url: 'https://github.com/alvorg11/ks.git'  
-    }
-	
-	stage('Maven Version'){
-	    sh 'mvn --version'  
-	}	
-	
-    stage('Maven Clean') {
-        sh 'mvn clean' 
-	}	  
-	stage('Maven Validate') {
-        sh 'mvn validate' 
-	}	
-	stage('Maven Compile') {
-        sh 'mvn compile' 
-	}	
-	stage('Maven Test') {
-        sh 'mvn test' 
-	}	
-	stage('Maven Package') {
-        sh 'mvn package' 
-	}	
-    stage('Maven Deploy') {
-        sh 'mvn deploy'
-    }		
+pipeline {
+    agent any
+    tools {    
+        maven 'maven-3.8.5'
+	}
+    stages {
+        stage('Git Clone') {
+            steps {
+                git credentialsId: 'git', url: 'https://github.com/alvorg11/ks.git'  
+                  }	
+				}  
+        stage('Maven Version') {
+            steps {
+                sh 'mvn --version'   
+                  }			
+                }	
+		stage('Maven Clean') {
+            steps {
+                sh 'mvn clean'  
+                  }			
+                }				
+		stage('Maven Validate') {
+            steps {
+                sh 'mvn validate'  
+                  }			
+                }		
+        stage('Maven Compile') {
+            steps {
+                sh 'mvn compile'  
+                  }			
+                }		
+        stage('Maven Test') {
+            steps {
+                sh 'mvn test'  
+                  }			
+                }		
+        stage('Maven Package') {
+            steps {
+                sh 'package'  
+                  }			
+                }		
+        stage('Maven Deploy') {
+            steps {
+                sh 'mvn deploy'  
+                  }			
+                }		    		
+            }
 }
-
+ 
 
 
